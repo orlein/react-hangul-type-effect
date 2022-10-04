@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./TypeWriter.module.css";
+import * as Hangul from "hangul-js";
+import useTypeWriter from "../hooks/useTypeWriter";
 
 type TypeWriterProps = {
   text: string;
@@ -7,40 +8,16 @@ type TypeWriterProps = {
   pauseDelay?: number;
 };
 
-type TypeWriterState = {
-  index: number;
-};
-
-const initialTypeWriterState: TypeWriterState = {
-  index: 0,
-};
-
 export default function TypeWriter(props: TypeWriterProps) {
-  const { text, pauseDelay = 1000, typeDelay = 100 } = props;
+  const [displayedText, index] = useTypeWriter(props);
 
-  const [state, setState] = React.useState<TypeWriterState>(
-    initialTypeWriterState
+  return (
+    <>
+      <div>{props.text}</div>
+      <div>{displayedText}</div>
+      <div>
+        {props.text.length - 1} vs {index}
+      </div>
+    </>
   );
-
-  React.useEffect(() => {
-    const nextIndex = state.index + 1;
-
-    const isLastCharacter = nextIndex === text.length + 1;
-
-    setTimeout(
-      () => {
-        setState({
-          index: isLastCharacter ? 0 : nextIndex,
-        });
-      },
-      isLastCharacter ? pauseDelay : typeDelay
-    );
-  }, [pauseDelay, state.index, text.length, typeDelay]);
-
-  const displayedText = React.useMemo(
-    () => text.slice(0, state.index),
-    [state.index, text]
-  );
-
-  return <span>{displayedText}</span>;
 }
