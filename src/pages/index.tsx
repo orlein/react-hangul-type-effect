@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 
 export default function HomePage() {
   const [pauseDelay, setPauseDelay] = React.useState(1000);
-  const [typeDelay, setTypeDelay] = React.useState(200);
+  const [typeDelay, setTypeDelay] = React.useState(50);
 
   return (
     <main>
@@ -25,7 +25,12 @@ export default function HomePage() {
         />
       </div>
       <TypeWriter
-        text="헬로월드HelloWorld안녕안녕ㅋㅋㅋ히히히메롱메롱wefkljlwekjf"
+        texts={[
+          "첫번째 한글문장",
+          "두번째는 영어문장이 섞여있는데 This is English sentence",
+          "세번째는 그냥 또 한글문장",
+          "네번째는 그냥 lorem ipsum dolor sit amet 어쩌구저쩌구",
+        ]}
         pauseDelay={pauseDelay}
         typeDelay={typeDelay}
       />

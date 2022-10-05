@@ -1,20 +1,20 @@
 import React from "react";
 import * as Hangul from "hangul-js";
-import useTypeWriter from "../hooks/useTypeWriter";
+import useTypeWriter, { UseTypeWriterProps } from "../hooks/useTypeWriter";
 
-type TypeWriterProps = {
-  text: string;
-  typeDelay?: number;
-  pauseDelay?: number;
-};
-
-export default function TypeWriter(props: TypeWriterProps) {
-  const [displayedText, index] = useTypeWriter(props);
+export default function TypeWriter(props: UseTypeWriterProps) {
+  const [displayedText, state] = useTypeWriter(props);
 
   return (
     <>
-      <div>{props.text}</div>
+      <div>
+        {props.texts.map((v) => (
+          <div key={v}>{v}</div>
+        ))}
+      </div>
+      <p />
       <div>{displayedText}</div>
+      <div>{state.isForwarding ? "정방향 진행" : "역방향 진행"}</div>
     </>
   );
 }
