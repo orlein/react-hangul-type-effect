@@ -9,12 +9,13 @@ export default function TypeWriter(props: UseTypeWriterProps) {
     <>
       <div>
         {props.texts.map((v) => (
-          <div key={v}>{v}</div>
+          <ul key={v}>{v}</ul>
         ))}
       </div>
       <p />
-      <div>{displayedText}</div>
+      <hr />
       <div>{state.isForwarding ? "정방향 진행" : "역방향 진행"}</div>
+      <h1>{displayedText}</h1>
     </>
   );
 }

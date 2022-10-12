@@ -3,26 +3,12 @@ import TypeWriter from "../components/TypeWriter";
 import styles from "../styles/Home.module.css";
 
 export default function HomePage() {
-  const [pauseDelay, setPauseDelay] = React.useState(1000);
-  const [typeDelay, setTypeDelay] = React.useState(50);
-
   return (
     <main>
       <div>
-        <span>Pause Delay:</span>
-        <input
-          placeholder="pauseDelay"
-          value={pauseDelay}
-          onChange={(e) => setPauseDelay(Number(e.target.value))}
-          type="number"
-        />
-        <span>Type Delay:</span>
-        <input
-          placeholder="typeDelay"
-          value={typeDelay}
-          onChange={(e) => setTypeDelay(Number(e.target.value))}
-          type="number"
-        />
+        <p>Pause Delay: 1000 ms</p>
+        <p>Type Delay: 50 ms </p>
+        <p>Delete Delay: 10 ms </p>
       </div>
       <TypeWriter
         texts={[
@@ -31,8 +17,9 @@ export default function HomePage() {
           "세번째는 그냥 또 한글문장",
           "네번째는 그냥 lorem ipsum dolor sit amet 어쩌구저쩌구",
         ]}
-        pauseDelay={pauseDelay}
-        typeDelay={typeDelay}
+        pauseDelay={1000}
+        typeDelay={50}
+        deleteDelay={10}
       />
     </main>
   );

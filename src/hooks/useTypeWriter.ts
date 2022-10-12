@@ -4,6 +4,7 @@ import * as Hangul from "hangul-js";
 export type UseTypeWriterProps = {
   texts: string[];
   typeDelay?: number;
+  deleteDelay?: number;
   pauseDelay?: number;
 };
 
@@ -73,7 +74,7 @@ function updateStateBackwarding(prev: UseTypeWriterState) {
 }
 
 export default function useTypeWriter(props: UseTypeWriterProps) {
-  const { texts, pauseDelay = 1000, typeDelay = 100 } = props;
+  const { texts, pauseDelay = 1000, typeDelay = 100, deleteDelay = 10 } = props;
 
   const [textIndex, setTextIndex] = React.useState({
     index: 0,
@@ -129,12 +130,27 @@ export default function useTypeWriter(props: UseTypeWriterProps) {
     const prevIndex = state.flatIndex - 1;
     const isFirstCharacter = prevIndex === -1;
 
+    const nextIsForwarding =
+      isFirstCharacter ||
+      (state.isForwarding && !isFirstCharacter && !isLastCharacter);
+
     if (isLastCharacter || isFirstCharacter) {
       return pauseDelay;
     }
 
-    return typeDelay;
-  }, [disassembledText, state.flatIndex, typeDelay, pauseDelay]);
+    if (nextIsForwarding) {
+      return typeDelay;
+    }
+
+    return deleteDelay;
+  }, [
+    disassembledText,
+    state.flatIndex,
+    state.isForwarding,
+    deleteDelay,
+    pauseDelay,
+    typeDelay,
+  ]);
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
