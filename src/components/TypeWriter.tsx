@@ -1,9 +1,8 @@
 import React from "react";
-import * as Hangul from "hangul-js";
-import useTypeWriter, { UseTypeWriterProps } from "../hooks/useTypeWriter";
+import useUniTyper, { UseUniTyperProps } from "../hooks/useUniTyper";
 
-function TypeWriter(props: UseTypeWriterProps) {
-  const [displayedText, state] = useTypeWriter(props);
+function TypeWriter(props: UseUniTyperProps) {
+  const [displayedText, state] = useUniTyper(props);
 
   return (
     <>
