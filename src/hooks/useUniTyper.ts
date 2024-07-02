@@ -1,5 +1,7 @@
 import React from "react";
-import { decompose, FullDecomposed, combine } from "@beavercoding/uni-typer";
+import { decompose, combine } from "@beavercoding/uni-typer";
+
+type FullDecomposed = ReturnType<typeof decompose>[number];
 
 export type UseUniTyperProps = {
   texts: string[];
